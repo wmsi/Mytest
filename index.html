@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Muscle Pi Output</title>
+    </head>
+    <body>
+        <h4>Current Muscle:</h4>
+        <div id="msg">Waiting for connection...</div>
+        <script>
+            // Enter the IP of the RPi here:
+            var ws = new WebSocket("ws://10.254.207.169:3000/")
+            var message = document.getElementById("msg");
+	        var reader = new FileReader();
+
+	        reader.onload = function() {
+	            message.innerHTML = reader.result;
+	            console.log(reader.result);
+	        }
+
+            ws.onmessage = function (event) {
+                reader.readAsText(event.data);
+                message.style.cssText = "color: green;"
+                window.setTimeout(function() {
+                    message.style.cssText = "color: black;"
+                }, 250);
+            };
+
+        </script>
+    </body>
+</html>
