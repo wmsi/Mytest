@@ -35,7 +35,6 @@ class App(object):
         self.label2.grid(column = 0, row = 1, padx = 5, pady = 5)
         self.sensor2 = ttk.Entry()
         self.sensor2.grid(row=1, column=1, padx = 5, pady = 5)
-    # make the Enter key change the style
         self.sensor1.bind('<Return>', self.change_style)
     # make a Button to store the entries and quit the program
         button = ttk.Button(text='OK')
@@ -85,8 +84,8 @@ while True:
         if count > 2:
             break
 
-#Server loop that uploads the arduino output to server
-start_server = websockets.serve(muscle_output, '127.0.0.1', 3000)
+#loop that uploads the arduino output to server
+start_server = websockets.serve(muscle_output, port = 3000)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 
