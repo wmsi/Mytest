@@ -57,6 +57,7 @@ class App(object):
             self.root.title(content)
 
 app = App()
+app.root.attributes('-fullscreen', False)
 app.root.mainloop()
 
 #function that prints the output to the server

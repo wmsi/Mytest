@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Muscle Pi Output</title>
+    </head>
+    <body>
+        <script>
+            // 10.254.207.169
+            var ws = new WebSocket("ws://127.0.0.1:3000/")
+            var messages = document.createElement('ul');
+            document.body.appendChild(messages);
+	    var reader = new FileReader();
+
+	    reader.onload = function() {
+		var msgs = document.getElementsByTagName('ul')[0];
+                var message = document.createElement('li');
+                var content = document.createTextNode(reader.result);
+                message.appendChild(content);
+                msgs.appendChild(message);
+	    }
+
+            ws.onmessage = function (event) {
+                reader.readAsText(event.data);
+            };
+
+        </script>
+    </body>
+</html>
